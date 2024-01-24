@@ -8,5 +8,7 @@ Tenemos un cliente que quiere llevar a cabo una campaña de marketing online y h
 - ¿Cómo clasificar los videos en función de sus comentarios y otras métricas?
 - ¿Qué factores influyen en la popularidad de un video de YouTube?
 
-> Nota
-YouTube utiliza la interacción de los usuarios para denomiar a un video como ***Tendencia***. Esto involucra variables como el número de visitas, cuántas veces el video ha sido compartido, la cantidad de comentarios y likes del video 
+> Nota:
+YouTube utiliza la interacción de los usuarios para denomiar a un video como ***Tendencia***. Esto involucra variables como el número de visitas, cuántas veces el video ha sido compartido, la cantidad de comentarios y likes del video
+
+### Cómo desarrollaremos este proyecto
