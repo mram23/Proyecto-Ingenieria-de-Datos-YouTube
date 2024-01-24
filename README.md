@@ -13,3 +13,6 @@ YouTube utiliza la interacción de los usuarios para denomiar a un video como **
 
 ### Cómo desarrollaremos este proyecto
 1. Nos encargaremos de la ingesta de datos, en este caso utilizaremos como fuente de datos el siguiente dataset [Trending YouTube Video Stadistics](https://www.kaggle.com/datasets/datasnaek/youtube-new?select=CA_category_id.json)
+2. Al tener nuestra _data cruda_ lo que haremos es el pre-procesamiento. Para ello utilizaremos una función Lambda, y nos ayudaremos de un _ETL Job_ que nos permitirá construir un Flujo ETL para automatizar la _extracción, transformación y carga_ de la data a un Data Lake en buckets de AWS S3.
+3. Finalmente, mostraremos los _insights_ más relevantes mediante un dashboard en AWS QuickSight.
+
