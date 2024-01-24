@@ -9,6 +9,7 @@ Tenemos un cliente que quiere llevar a cabo una campaña de marketing online y h
 - ¿Qué factores influyen en la popularidad de un video de YouTube?
 
 > Nota:
-YouTube utiliza la interacción de los usuarios para denomiar a un video como ***Tendencia***. Esto involucra variables como el número de visitas, cuántas veces el video ha sido compartido, la cantidad de comentarios y likes del video
+YouTube utiliza la interacción de los usuarios para denomiar a un video como ***Tendencia***. Esto involucra variables como el número de visitas, cuántas veces el video ha sido compartido, la cantidad de comentarios y likes del video.
 
 ### Cómo desarrollaremos este proyecto
+1. Nos encargaremos de la ingesta de datos, en este caso utilizaremos como fuente de datos el siguiente dataset [Trending YouTube Video Stadistics](https://www.kaggle.com/datasets/datasnaek/youtube-new?select=CA_category_id.json)
