@@ -4,4 +4,9 @@
 Si eres un apasionado del mundo de los datos o buscas tu entrada en este campo, este proyecto es tu puerta de acceso. Descubre el camino hacia nuevas oportunidades.
 ------------
 Empecemos contextualizando la problemática y por qué se desarrolla este proyecto:
-Tenemos un cliente que quiere llevar a cabo 
+Tenemos un cliente que quiere llevar a cabo una campaña de marketing online y han decidido que su principal canal de publicidad será YouTube. Esto debido a que YouTube se encuentra en el top de sitios web más visitados en el mundo. Pero antes de invertir en la campaña, se requiere profundizar en los siguiente puntos:
+- ¿Cómo clasificar los videos en función de sus comentarios y otras métricas?
+- ¿Qué factores influyen en la popularidad de un video de YouTube?
+
+> Nota
+YouTube utiliza la interacción de los usuarios para denomiar a un video como ***Tendencia***. Esto involucra variables como el número de visitas, cuántas veces el video ha sido compartido, la cantidad de comentarios y likes del video 
