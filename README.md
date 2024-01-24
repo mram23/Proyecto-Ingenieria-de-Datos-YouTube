@@ -16,4 +16,4 @@ YouTube utiliza la interacción de los usuarios para denomiar a un video como **
 2. Al tener nuestra _data cruda_ lo que haremos es el pre-procesamiento. Para ello utilizaremos una función Lambda, y nos ayudaremos de un _ETL Job_ que nos permitirá construir un Flujo ETL para automatizar la _extracción, transformación y carga_ de la data a un Data Lake en buckets de AWS S3.
 3. Finalmente, mostraremos los _insights_ más relevantes mediante un dashboard en AWS QuickSight.
 
-![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/7411ad77-bf6f-4758-bc35-cacdd3eb0bc6)
+##### Primer paso: Ingesta de Datos
