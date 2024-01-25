@@ -26,7 +26,7 @@ def lambda_handler(event, context):
         df_step_1 = pd.json_normalize(df_raw['items'])
 
         # Hacemos la transformacion de json a parquet
-				# Y luego lo escribimos en el bucket
+	# Y luego lo escribimos a la base de datos de Glue denominada cleaned_statistics_reference_data
         wr_response = wr.s3.to_parquet(
             df=df_step_1,
             path=os_input_s3_cleansed_layer,
