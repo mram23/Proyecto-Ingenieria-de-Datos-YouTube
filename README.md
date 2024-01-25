@@ -88,3 +88,12 @@ Y el output tras eliminar y volver a subir los archivos al folder _raw_statistic
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/061b4170-1e4f-4480-a2b1-6621be304f22)
 Y es que esta data que se encuentra en AWS S3, con ayuda de la función lambda que crea la nueva tabla _cleaned_statistics_reference_data_ en la base de datos _db_youtube_cleaned_ puede ser consultada mediante queries mediante AWS Athena
 
+Hasta el momento solo hemos trabajado con la data que se encuentra en la carpeta _raw_statistics_reference_data_, es momento de hacerlo con _raw_statistics_. Para ello, lo primero que haremos es crear un _crawler_ que colecte la data de esta carpeta encontrada en el bucket _project-youtube-raw-useast1_. Tras ejecutarlo, notamos que en la tabla _raw_statistics_ dentro de la base de datos _de_youtube_raw_ detecta la partición por región:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/022c8d54-f68e-4c31-a9ac-2a221d9c0102)
+
+Ahora, esa tabla es de la data cruda ingestada, lo que necesitamos es pre-procesarla (hacer algunos cambios en el tipo de dato de algunas variables y transformar de formato csv a parquet). El resultado será almacenado dentro del bucket _project-youtube-useast1-cleansed-data_ y con esta data se creará la tabla _raw_statistics_ pero dentro de la base de datos _db_youtube_cleaned_ en AWS Glue. Esto mediante un _ETL Job_ creado a partir del siguiente [script](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/blob/5d567ff8492babc83b8437d37791e0fabff90300/etljob_script.py). Como resultado tenemos en la carpeta _raw_statistics_ del bucket _project-youtube-useast1-cleansed-data_:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/fde14eb8-c91b-404d-aba3-ae6e6a5ee4f9)
+
+Y procedemos a correr un crawler para colectar esta _data limpia_:![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/a374cf47-9541-4bd2-b71b-db0993f5222f)
+
+#### Segundo paso: Presentación de insights en AWS QuickSight
