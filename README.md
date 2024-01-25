@@ -39,3 +39,12 @@ aws s3 cp MXvideos.csv s3://project-youtube-raw-useast1/youtube/raw_statistics/r
 aws s3 cp RUvideos.csv s3://project-youtube-raw-useast1/youtube/raw_statistics/region=ru/
 aws s3 cp USvideos.csv s3://project-youtube-raw-useast1/youtube/raw_statistics/region=us/
 ```
+> Nota:
+Para correr estos comandos, es necesario que en el cmd nos encontremos en el directorio donde hemos descargado nuestro dataset de Kaggle.
+
+Así tendremos como resultado:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/cbd3b5f4-6107-4eff-aded-dbf6dd20e68a)
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/1dfa4e53-5b7b-45c8-8c73-4b632ce1818c)
+
+Ahora que tenemos nuestra data cruda cargada en el bucket de AWS S3 llamado _project-youtube-raw-useast1_, lo que necesitamos es colectar esta data con ayuda de un _crawler_ del servicio de AWS Glue. El cual nos permitirá conocer la estructura (_schema_) y contenido de la data a partir de la fuente de datos que configuremos, que en este caso será el bucket _project-youtube-raw-useast1_. A continuación se muestra la configuración del _crawler de AWS Glue_:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/07561b9a-5abe-4c60-a15b-9be10f22be13)
