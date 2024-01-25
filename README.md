@@ -70,4 +70,18 @@ Y la función que utilizamos la pueden encontrar en el archivo [lambda_function.
 Aquí también es necesario asignar un rol con los permisos necesarios, tal que la función lambda pueda acceder al bucket S3 y a la base de datos en AWS Glue donde se creará la nueva tabla _cleaned_statistics_reference_data_:
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/07e20677-aaca-48a4-931d-670df640926e)
 
+También es necesario configurar las variables de entorno, que hemos asignado en el código:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/700cab47-8cc2-4f8c-81b8-9aa718382dd9)
+OJO: La base de datos _db_youtube_cleaned_ la creamos antes de testear el código para que la ejecución sea exitosa.
 
+Y como utilizamos algunas librerías como awswrangler y pandas, es necesario configurar un _layer_ donde es que se importan las librerías a utilizar. En este caso, es necesario usar _AWSSDKPandas-Python38_![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/426a9f1f-b714-4655-859c-d0424463f045)
+
+¿Cómo haremos para automatizar que esta función lambda se active cada que se crea un objeto nuevo?
+Esto se logra tras configurar un _trigger_ (estimulante/disparador), el cual será el evento tipo _All object create events_![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/706b0bff-0e82-47ac-8b23-32665b5edcdc)
+
+Entonces cada que se crea un nuevo objeto en el bucket, la función se activa. Aquí podemos ver cómo quedó el diagrama de la función Lambda
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/49d76685-dcee-4279-919a-6251706f6bfa)
+
+Y el output tras eliminar y volver a subir los archivos al folder _raw_statistics_reference_data_, en el bucket _project-youtube-raw-useast1_
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/061b4170-1e4f-4480-a2b1-6621be304f22)
+Y es que esta data que se encuentra en AWS S3, con ayuda de la función lambda que crea la nueva tabla _cleaned_statistics_reference_data_ en la base de datos _db_youtube_cleaned_ puede ser consultada mediante queries mediante AWS Athena
