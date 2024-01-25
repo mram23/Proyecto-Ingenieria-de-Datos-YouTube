@@ -58,3 +58,9 @@ Así finalmente el resumen de a configuración de nuestro crawler es la siguient
 
 Y podemos ver los resultados de correr (ejecutar) este crawler, pues se ha creado una tabla nueva denominada _raw_statistics_reference_data_, asimismo observamos su schema:
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/9ac62d5b-d06d-44b9-a932-21e95755932a)
+
+Ahora, podemos hacer consultas dirigiendonos a la tabla _raw_statistics_reference_data_ que se encuentra en la base de datos _de_youtube_raw_ en AWS Glue. Lo que procederemos a hacer es el pre-procesamiento puesto que lo que necesitamos nosotros es la data que se encuentra dentro del arreglo _items_, y debido a que trabajamos con grandes volúmenes de datos es conveniente hacer una transformación a parquet.
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/40abd7c9-cdf4-42fb-bbc2-9bd63e401304)
+Entonces, tendremos nuestro archivo en formato .json, y con ayuda de una función lambda cada vez que un nuevo objeto es creado en el bucket _project-youtube-raw-useast1_ se activará, se produce la transformación a parquet y el resultado es llevado al bucket de data limpia denominado _project-youtube-useast1-cleansed-data_ junto con la creación de la tabla _cleaned_statistics_reference_data_ en la base de datos que creamos previamente denominada _db_youtube_clean_ dentro de AWS Glue
+
+
