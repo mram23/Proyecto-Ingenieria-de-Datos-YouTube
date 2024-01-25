@@ -66,4 +66,8 @@ Entonces, con ayuda de una función lambda que se activa cuandoe un nuevo objeto
 A continuación, se muestra la configuración de creación de la función lambda:![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/f0feaa20-ad45-4fde-8b09-735144e5e772)
 Y la función que utilizamos la pueden encontrar en el archivo [lambda_function.py](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/blob/4ca442609842752ab67412870c3f98e87aa0afb3/lambda_function.py)
 
+> Nota:
+Aquí también es necesario asignar un rol con los permisos necesarios, tal que la función lambda pueda acceder al bucket S3 y a la base de datos en AWS Glue donde se creará la nueva tabla _cleaned_statistics_reference_data_:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/07e20677-aaca-48a4-931d-670df640926e)
+
 
