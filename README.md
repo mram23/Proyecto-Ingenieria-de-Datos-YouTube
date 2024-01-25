@@ -19,6 +19,9 @@ YouTube utiliza la interacción de los usuarios para denomiar a un video como **
 Podemos entender un Data Lake como un repositorio centralizado donde almacenamos toda nuestra data, ya estructurada o no estructurada. En nuestro caso, el Data Lake que formaremos estará conformada por la _data cruda_, _data limpia_ y _data para análisis_.
 
 #### Primer paso: Ingesta de Datos
+> Nota:
+Es conveniente como buena prácticar crear un usuario IAM con el permiso _AdministratorAccess_ y utilizarlo enves del logeo con la cuenta raíz. Asimismo, por cuestiones de seguridad se recomienda activar la autenticación multifactor (MFA).
+
 Utilizando la interfaz de línea de comandos (AWS CLI), cargaremos nuestro dataset de Kaggle en el bucket de AWS S3 llamado _project-youtube-raw-useast1_. Esto mediante los siguientes comandos:
 ```python3
 # Para copiar todos los datos de referencia JSON en la misma ubicación:
