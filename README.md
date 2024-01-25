@@ -59,6 +59,8 @@ Así finalmente el resumen de a configuración de nuestro crawler es la siguient
 Y podemos ver los resultados de correr (ejecutar) este crawler, pues se ha creado una tabla nueva denominada _raw_statistics_reference_data_, asimismo observamos su schema:
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/9ac62d5b-d06d-44b9-a932-21e95755932a)
 
+#### Segundo paso: Preprocesamiento y ETL Pipeline
+
 Ahora, podemos hacer consultas dirigiendonos a la tabla _raw_statistics_reference_data_ que se encuentra en la base de datos _de_youtube_raw_ en AWS Glue. Lo que procederemos a hacer es el pre-procesamiento puesto que lo que necesitamos nosotros es la data que se encuentra dentro del arreglo _items_, y debido a que trabajamos con grandes volúmenes de datos es conveniente hacer una transformación a parquet.
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/40abd7c9-cdf4-42fb-bbc2-9bd63e401304)
 Entonces, con ayuda de una función lambda que se activa cuandoe un nuevo objeto es creado en el bucket _project-youtube-raw-useast1_, se encarga de la transformación de json a parquet y el resultado es llevado al bucket de data limpia denominado _project-youtube-useast1-cleansed-data_ junto con la creación de la tabla _cleaned_statistics_reference_data_ en la base de datos que creamos previamente denominada _db_youtube_clean_ dentro de AWS Glue.
@@ -74,14 +76,15 @@ También es necesario configurar las variables de entorno, que hemos asignado en
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/700cab47-8cc2-4f8c-81b8-9aa718382dd9)
 OJO: La base de datos _db_youtube_cleaned_ la creamos antes de testear el código para que la ejecución sea exitosa.
 
-Y como utilizamos algunas librerías como awswrangler y pandas, es necesario configurar un _layer_ donde es que se importan las librerías a utilizar. En este caso, es necesario usar _AWSSDKPandas-Python38_![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/426a9f1f-b714-4655-859c-d0424463f045)
+Y como utilizamos algunas librerías como awswrangler y pandas, es necesario configurar un _layer_ donde es que se importan las librerías a utilizar. En este caso, es necesario usar _AWSSDKPandas-Python38_: ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/426a9f1f-b714-4655-859c-d0424463f045)
 
 ¿Cómo haremos para automatizar que esta función lambda se active cada que se crea un objeto nuevo?
-Esto se logra tras configurar un _trigger_ (estimulante/disparador), el cual será el evento tipo _All object create events_![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/706b0bff-0e82-47ac-8b23-32665b5edcdc)
+Esto se logra tras configurar un _trigger_ (estimulante/disparador), el cual será el evento tipo _All object create events_: ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/706b0bff-0e82-47ac-8b23-32665b5edcdc)
 
-Entonces cada que se crea un nuevo objeto en el bucket, la función se activa. Aquí podemos ver cómo quedó el diagrama de la función Lambda
+Entonces cada que se crea un nuevo objeto en el bucket, la función se activa. Aquí podemos ver cómo quedó el diagrama de la función Lambda:
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/49d76685-dcee-4279-919a-6251706f6bfa)
 
-Y el output tras eliminar y volver a subir los archivos al folder _raw_statistics_reference_data_, en el bucket _project-youtube-raw-useast1_
+Y el output tras eliminar y volver a subir los archivos al folder _raw_statistics_reference_data_, en el bucket _project-youtube-raw-useast1_:
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/061b4170-1e4f-4480-a2b1-6621be304f22)
 Y es que esta data que se encuentra en AWS S3, con ayuda de la función lambda que crea la nueva tabla _cleaned_statistics_reference_data_ en la base de datos _db_youtube_cleaned_ puede ser consultada mediante queries mediante AWS Athena
+
