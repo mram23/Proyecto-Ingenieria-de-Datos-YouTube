@@ -96,4 +96,15 @@ Ahora, esa tabla es de la data cruda ingestada, lo que necesitamos es pre-proces
 
 Y procedemos a correr un crawler para colectar esta _data limpia_:![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/a374cf47-9541-4bd2-b71b-db0993f5222f)
 
-#### Segundo paso: Presentación de insights en AWS QuickSight
+#### Tercer paso: Presentación de insights en AWS QuickSight
+
+En primer lugar, procedemos a desarrollar un ETL Pipeline (Extract, Transform, Load - Pipeline: diseño, flujo, plan) que permita pre-procesar la data que tenemos ya limpia, con el fin de obtener una versión final que podamos utilizar para hacer los reportes (analítica). En este caso queremos combinar las tablas _raw_statistics_ y _cleaned_statistics_reference_data_ de la base de datos _db_youtube_cleaned_:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/d0e3c199-4445-497c-9d30-70d8a6ca587a)
+El resultado del inner join está dirigido hacia un nuevo bucket S3 que servirá para la parte de analítica y reporte. Entonces, es conveniente crear también una base de datos y su respectiva tabla para la capa de analytics, incluyendo la partición por _region_:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/bb9fb639-e046-4f15-be7b-de7113bea73d)
+
+Finalmente, tras habernos logeado en AWS QuickSight podemos tener un gráfico como el siguiente:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/18875522-e4ba-4457-a840-3802626ca4ec)
+
+Y esta es la arquitectura final del proyecto que hemos desarrollado:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/280988f1-b628-414b-9725-3134c8da151b)
