@@ -48,3 +48,13 @@ Así tendremos como resultado:
 
 Ahora que tenemos nuestra data cruda cargada en el bucket de AWS S3 llamado _project-youtube-raw-useast1_, lo que necesitamos es colectar esta data con ayuda de un _crawler_ del servicio de AWS Glue. El cual nos permitirá conocer la estructura (_schema_) y contenido de la data a partir de la fuente de datos que configuremos, que en este caso será el bucket _project-youtube-raw-useast1_. A continuación se muestra la configuración del _crawler de AWS Glue_:
 ![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/07561b9a-5abe-4c60-a15b-9be10f22be13)
+
+> Nota:
+Para que el crawler pueda acceder a la data del bucket de AWS S3, es necesario asignarle los respectivos permisos necesarios al servicio, esto mediante un rol:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/e519003d-51a6-4a8a-9d86-1502ca5317cf)
+
+Así finalmente el resumen de a configuración de nuestro crawler es la siguiente:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/e41c9c17-6b3f-4ec6-968d-0ad45b7914a3)
+
+Y podemos ver los resultados de correr (ejecutar) este crawler, pues se ha creado una tabla nueva denominada _raw_statistics_reference_data_, asimismo observamos su schema:
+![image](https://github.com/mram23/Proyecto-Ingenieria-de-Datos-YouTube/assets/132526921/9ac62d5b-d06d-44b9-a932-21e95755932a)
