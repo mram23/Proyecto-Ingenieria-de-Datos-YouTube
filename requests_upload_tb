@@ -1,0 +1,67 @@
+import json
+import os
+import boto3
+from datetime import datetime, timedelta
+from boto3.dynamodb.conditions import Key
+
+# Nombre de la tabla en DynamoDB
+TABLE_NAME = os.environ['TABLE_NAME']
+
+# Inicializar cliente de DynamoDB
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table(TABLE_NAME)
+
+def lambda_handler(event, context):
+    http_method = event['httpMethod']
+    
+    if http_method == 'GET':
+        # Manejar el método GET para listar todos los datos por sede_id
+        sede_id = event['queryStringParameters'].get('sede_id')
+        if sede_id:
+            response = table.query(
+                KeyConditionExpression=Key('sede_id').eq(sede_id)
+            )
+            return {
+                'statusCode': 200,
+                'body': json.dumps(response['Items'])
+            }
+        else:
+            return {
+                'statusCode': 400,
+                'body': json.dumps({'error': 'sede_id es requerido para GET'})
+            }
+    
+    elif http_method == 'POST':
+        # Manejar el método POST para agregar un nuevo registro
+        try:
+            data = json.loads(event['body'])
+            fecha_inspeccion = (datetime.utcnow() - timedelta(hours=5)).strftime("%Y-%m-%d %H:%M:%S")
+
+            item = {
+                'sede_id': data['sede_id'],
+                'estado_robot': data['estado_robot'],
+                'fecha_inspeccion': fecha_inspeccion
+            }
+
+            # Agregar atributos opcionales si están en los datos de entrada
+            if 'cantidad_fallas' in data:
+                item['cantidad_fallas'] = data['cantidad_fallas']
+            if 'area_afectada' in data:
+                item['area_afectada'] = data['area_afectada']
+            
+            table.put_item(Item=item)
+            return {
+                'statusCode': 200,
+                'body': json.dumps({'message': 'Datos insertados correctamente'})
+            }
+        except Exception as e:
+            return {
+                'statusCode': 500,
+                'body': json.dumps({'error': str(e)})
+            }
+    
+    else:
+        return {
+            'statusCode': 405,
+            'body': json.dumps({'error': 'Método no permitido'})
+        }
